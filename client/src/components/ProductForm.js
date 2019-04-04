@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
+import ProductAdapter from '../adapters/ProductAdapter'
 
 class ProductForm extends React.Component {
   state = {
@@ -25,7 +26,6 @@ class ProductForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('clicked')
     const formData = new FormData();
     formData.append('name', this.state.name)
     formData.append('description', this.state.description)
@@ -38,20 +38,28 @@ class ProductForm extends React.Component {
       method: "POST",
       body: formData
     })
-
+    .then(() => ProductAdapter.getProducts())
+    this.setState({
+      name: '',
+      description: '',
+      sku: '',
+      cost: '',
+      inventory: '',
+      photo: null
+    })
+    e.target.reset()
   }
 
   render() {
-    console.log(this.state.name,this.state.description,this.state.sku,this.state.cost,this.state.inventory,this.state.photo)
     return (
       <div className="regForm">
         <Form onSubmit={this.handleSubmit}>
-          <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' />
-          <Form.TextArea onChange={this.handleChange} name="description" label='Product description' placeholder='Product description...' />
-          <Form.Input onChange={this.handleChange} name="sku" fluid label='SKU' placeholder='SKU' />
-          <Form.Input onChange={this.handleChange} name="cost" fluid type="number" label='Cost' placeholder='Cost' />
-          <Form.Input onChange={this.handleChange} name="inventory" fluid type="number" label='Inventory' placeholder='Inventory' />
-          <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Product Image' />
+          <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' value={this.state.name} />
+          <Form.TextArea onChange={this.handleChange} name="description" label='Product description' placeholder='Product description...' value={this.state.description}/>
+          <Form.Input onChange={this.handleChange} name="sku" fluid label='SKU' placeholder='SKU' value={this.state.sku}/>
+          <Form.Input onChange={this.handleChange} name="cost" fluid type="number" label='Cost' placeholder='Cost' value={this.state.cost}/>
+          <Form.Input onChange={this.handleChange} name="inventory" fluid type="number" label='Inventory' placeholder='Inventory' value={this.state.inventory}/>
+          <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Product Image'/>
           <Form.Button>Submit</Form.Button>
         </Form>
       </div>
