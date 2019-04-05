@@ -15,6 +15,31 @@ class CustomerRegistrationForm extends React.Component {
     })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    }
+    fetch("http://localhost:3000/api/v1/users", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json",
+        "Accepts":"application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(console.log)
+    this.setState({
+      name: '',
+      email: '',
+      password: '',
+      confirmed_password: ''
+    })
+  }
+
   render() {
     return (
       <div className='login-form'>
@@ -23,23 +48,25 @@ class CustomerRegistrationForm extends React.Component {
             <Header as='h2' textAlign='center'>
               Register a customer account
             </Header>
-            <Form size='large'>
+            <Form size='large' onSubmit={this.handleSubmit}>
               <Segment stacked>
-                <Form.Input onClick={this.handleChange} fluid name="name" placeholder='Name' />
-                <Form.Input onClick={this.handleChange} fluid name="email" placeholder='E-mail address' />
+                <Form.Input onChange={this.handleChange} fluid name="name" placeholder='Name' value={this.state.name}/>
+                <Form.Input onChange={this.handleChange} fluid name="email" placeholder='E-mail address' value={this.state.email}/>
                 <Form.Input
                   fluid
                   placeholder='Password'
                   type='password'
                   name="password"
-                  onClick={this.handleChange}
+                  value={this.state.password}
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   placeholder='Confirm password'
                   type='password'
                   name="confirmed_password"
-                  onClick={this.handleChange}
+                  value={this.state.confirmed_password}
+                  onChange={this.handleChange}
                 />
                 <Button fluid size='large'>
                   Register

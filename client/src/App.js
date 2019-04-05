@@ -13,13 +13,13 @@ import { connect } from 'react-redux'
 class App extends Component {
 
   componentDidMount() {
-    ProductAdapter.getProducts()
+    // ProductAdapter.getProducts()
   }
 
   render() {
     return (
       <div className="App">
-        <ProductContainer />
+        {/*<ProductContainer />*/}
         <ProductForm />
         <LoginForm />
         <CustomerRegistrationForm />
