@@ -1,6 +1,6 @@
 class StoreSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :imageUrl
+  attributes :id, :name#, :imageUrl
   belongs_to :vendor
 
   def imageUrl

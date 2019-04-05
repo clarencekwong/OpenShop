@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
-class ProductForm extends React.Component {
+class StoreForm extends React.Component {
   state = {
     name: '',
     photo: null
@@ -36,8 +36,8 @@ class ProductForm extends React.Component {
     return (
       <div className="regForm">
         <Form onSubmit={this.handleSubmit}>
-          <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' />
-          <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Product Image' />
+          <Form.Input onChange={this.handleChange} fluid name="name" label='Store name' placeholder='Store name' />
+          <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Store Image' />
           <Form.Button>Submit</Form.Button>
         </Form>
       </div>
@@ -45,4 +45,4 @@ class ProductForm extends React.Component {
   }
 }
 
-export default ProductForm;
+export default StoreForm;

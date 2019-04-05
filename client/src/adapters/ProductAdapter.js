@@ -6,7 +6,9 @@ class ProductAdapter {
   static getProducts() {
     fetch(`${this.PRODUCT_URL}`)
       .then(res => res.json())
-      .then(products => {store.dispatch({type: 'FETCH_PRODUCT', payload: products})})
+      .then(products => {
+        store.dispatch({type: 'FETCH_PRODUCT', payload: products
+      })})
   }
 }
 
