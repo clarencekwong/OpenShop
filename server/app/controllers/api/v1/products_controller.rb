@@ -1,8 +1,12 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :find_product, only: [:update]
+  before_action :find_product, only: [:update, :show]
   def index
     @products = Product.all
     render json: @products
+  end
+
+  def show
+    render json: @product
   end
 
   def create
