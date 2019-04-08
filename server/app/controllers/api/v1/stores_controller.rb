@@ -1,8 +1,12 @@
 class Api::V1::StoresController < ApplicationController
-  before_action :find_store, only: [:update]
+  before_action :find_store, only: [:update, :show]
   def index
     @stores = Store.all
     render json: @stores
+  end
+
+  def show
+    render json: @store
   end
 
   def create

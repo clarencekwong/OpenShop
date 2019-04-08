@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 class StoreForm extends React.Component {
   state = {
@@ -24,7 +25,7 @@ class StoreForm extends React.Component {
     const formData = new FormData();
     formData.append('name', this.state.name)
     formData.append('photo', this.state.photo)
-    formData.append('vendor_id', 1)
+    formData.append('vendor_id', this.props.selectedStore.id)
     fetch("http://localhost:3000/api/v1/products", {
       method: "POST",
       body: formData
@@ -45,4 +46,10 @@ class StoreForm extends React.Component {
   }
 }
 
-export default StoreForm;
+function mapStateToProps(state) {
+  return {
+    selectedStore: state.stores.selectedStore
+  }
+}
+
+export default connect(mapStateToProps)(StoreForm);

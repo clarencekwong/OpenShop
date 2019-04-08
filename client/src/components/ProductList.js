@@ -1,15 +1,19 @@
 import React from 'react'
 import uuid from 'uuid'
-import { connect } from 'react-redux'
 
 import { Card } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 import Product from './Product'
 
 class ProductList extends React.Component {
 
   renderProducts = () => {
-    return this.props.products.map(product => <Product key={uuid()} product={product}/>)
+    console.log('inside the render products function',this.props)
+    if (this.props.storeProducts && this.props.selectedStore) {
+      return this.props.storeProducts.map(product => <Product key={uuid()} product={product}/>)
+    }
+    return null
   }
 
   render() {
@@ -23,7 +27,8 @@ class ProductList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products.products
+    selectedStore: state.stores.selectedStore,
+    storeProducts: state.stores.storeProducts
   }
 }
 

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
-import store from '../store'
+import { connect } from 'react-redux'
+
+// import store from '../store'
 
 class VendorLoginForm extends React.Component {
   state = {
@@ -29,8 +31,8 @@ class VendorLoginForm extends React.Component {
 			if (response.errors) {
 				alert(response.errors)
 			} else {
-        console.log(response)
-        store.dispatch({type: "STORE_VENDOR", payload: response.user.id})
+        console.log(this.props)
+        this.props.dispatch({type: "STORE_VENDOR", payload: response.user.id})
 				localStorage.setItem('vendor_id', response.jwt)
 				}
 			})
@@ -75,4 +77,4 @@ class VendorLoginForm extends React.Component {
   }
 }
 
-export default VendorLoginForm
+export default connect(null)(VendorLoginForm)

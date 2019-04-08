@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
-import store from '../store'
 
 class CustomerLoginForm extends React.Component {
   state = {

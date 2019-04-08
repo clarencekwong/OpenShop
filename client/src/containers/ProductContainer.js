@@ -1,13 +1,37 @@
 import React from 'react'
+import { Container } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 import ProductList from '../components/ProductList'
+import StoreAdapter from '../adapters/StoreAdapter'
 
-export default class ProductContainer extends React.Component {
+class ProductContainer extends React.Component {
+
+  componentDidMount() {
+    console.log(this.props.selectedStore)
+    if (this.props.selectedStore) {
+      console.log('i fired when i mounted');
+      return StoreAdapter.getStoreProducts(this.props.selectedStore.id)
+    }
+    return null
+
+  }
+
   render() {
     return (
-      <div>
+      <Container>
+        <h1>{this.props.selectedStore ? this.props.selectedStore.name : null}</h1>
         <ProductList />
-      </div>
+      </Container>
     )
   }
 }
+
+function mapStateToProps(state) {
+  console.log(state.stores.selectedStore)
+  return {
+    selectedStore: state.stores.selectedStore
+  }
+}
+
+export default connect(mapStateToProps)(ProductContainer)

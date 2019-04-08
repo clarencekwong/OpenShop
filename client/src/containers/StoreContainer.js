@@ -4,10 +4,11 @@ import StoreList from '../components/StoreList'
 
 import { Container } from 'semantic-ui-react'
 
-const StoreContainer = () => {
+const StoreContainer = (props) => {
+  console.log('in store container',props)
   return (
     <Container>
-      <StoreList />
+      <StoreList history={props.history}/>
     </Container>
   )
 }
