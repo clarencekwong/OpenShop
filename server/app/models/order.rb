@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
-  has_many :order_items
-  has_many :products, through: :order_items
+  has_many :items
+  has_many :products, through: :items
 
   belongs_to :user
 end

@@ -34,8 +34,12 @@ class VendorLoginForm extends React.Component {
         console.log(this.props)
         this.props.dispatch({type: "STORE_VENDOR", payload: response.user.id})
 				localStorage.setItem('vendor_id', response.jwt)
-				}
-			})
+			}
+		})
+    this.setState({
+      email: "",
+      password: ""
+    })
 	}
 
 
@@ -54,6 +58,7 @@ class VendorLoginForm extends React.Component {
                   name="email"
                   iconPosition='left'
                   placeholder='E-mail address'
+                  value={this.state.email}
                   onChange={this.handleChange}
                 />
                 <Form.Input
@@ -63,6 +68,7 @@ class VendorLoginForm extends React.Component {
                   name="password"
                   placeholder='Password'
                   type='password'
+                  value={this.state.password}
                   onChange={this.handleChange}
                 />
                 <Button fluid size='large'>

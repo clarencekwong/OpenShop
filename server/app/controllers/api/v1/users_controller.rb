@@ -1,8 +1,12 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :find_user, only: [:update]
+  before_action :find_user, only: [:update, :show]
   def index
     @users = User.all
     render json: @users
+  end
+
+  def show
+    render json: @user
   end
 
   def create

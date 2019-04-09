@@ -1,16 +1,11 @@
 import React from 'react'
-import { Card, Image, Button } from 'semantic-ui-react'
-import { Route, NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Card, Image } from 'semantic-ui-react'
 
 import StoreAdapter from '../adapters/StoreAdapter'
-import ProductContainer from '../containers/ProductContainer'
 
 const Store = (props) => {
 
   const handleClick = () => {
-    // debugger
-
     StoreAdapter.selectStore(props.store, props.history)
   }
 

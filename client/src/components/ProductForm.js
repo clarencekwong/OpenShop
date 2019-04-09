@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
-import ProductAdapter from '../adapters/ProductAdapter'
 
 class ProductForm extends React.Component {
   state = {
@@ -34,11 +33,11 @@ class ProductForm extends React.Component {
     formData.append('inventory', this.state.inventory)
     formData.append('photo', this.state.photo)
     formData.append('store_id', 1)
+    debugger
     fetch("http://localhost:3000/api/v1/products", {
       method: "POST",
       body: formData
     })
-    .then(() => ProductAdapter.getProducts())
     this.setState({
       name: '',
       description: '',

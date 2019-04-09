@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_181356) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "order_items", force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.integer "product_id"
     t.integer "order_id"
     t.integer "quantity", default: 1
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_181356) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
     t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

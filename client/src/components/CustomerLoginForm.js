@@ -1,6 +1,10 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
+import { connect } from 'react-redux'
+
+import UserAdapter from '../adapters/UserAdapter'
+
 class CustomerLoginForm extends React.Component {
   state = {
 		email: "",
@@ -12,6 +16,10 @@ class CustomerLoginForm extends React.Component {
 			[event.target.name]: event.target.value
 		})
 	}
+
+  checkOrder = () => {
+
+  }
 
 	handleSubmit = () => {
 		fetch("http://localhost:3000/api/v1/userlogin", {
@@ -28,8 +36,20 @@ class CustomerLoginForm extends React.Component {
 				alert(response.errors)
 			} else {
 				localStorage.setItem('user_id', response.jwt)
+        UserAdapter.setUser(response.user.id)
+        UserAdapter.getUserOrders(response.user.id)
+        .then(() => {
+          const activeOrder = this.props.orders.find(order => order.status === false)
+          if (activeOrder) {
+            localStorage.setItem('order_id', activeOrder.id)
+          }
+        })
 			}
-			})
+		})
+    this.setState({
+      email: "",
+  		password: ""
+    })
 	}
 
 
@@ -48,6 +68,7 @@ class CustomerLoginForm extends React.Component {
                   name="email"
                   iconPosition='left'
                   placeholder='E-mail address'
+                  value={this.state.email}
                   onChange={this.handleChange}
                 />
                 <Form.Input
@@ -57,6 +78,7 @@ class CustomerLoginForm extends React.Component {
                   name="password"
                   placeholder='Password'
                   type='password'
+                  value={this.state.password}
                   onChange={this.handleChange}
                 />
                 <Button fluid size='large'>
@@ -71,4 +93,10 @@ class CustomerLoginForm extends React.Component {
   }
 }
 
-export default CustomerLoginForm
+function mapStateToProps(state) {
+  return {
+    orders: state.user.orders
+  }
+}
+
+export default connect(mapStateToProps)(CustomerLoginForm)

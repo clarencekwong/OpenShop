@@ -19,14 +19,14 @@ class StoreAdapter {
       })
   }
 
-  static selectStore(store_id, history) {
-    fetch(`${this.STORE_URL}/${store_id.id}`)
+  static selectStore(chose_store, history) {
+    fetch(`${this.STORE_URL}/${chose_store.id}`)
       .then(res => res.json())
       .then(selectedStore => {
         console.log('selectStore fired')
         store.dispatch({type: 'SELECT_STORE', payload: selectedStore})
       })
-      .then(x => history.push(`/${store_id.name}`))
+      .then(x => history.push(`/${chose_store.name}`))
   }
 }
 

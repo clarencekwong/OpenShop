@@ -7,7 +7,6 @@ import RegisterContainer from './containers/RegisterContainer'
 import StoreContainer from './containers/StoreContainer'
 import StoreForm from './components/StoreForm'
 import ProductContainer from './containers/ProductContainer'
-import ProductAdapter from './adapters/ProductAdapter'
 import ProductForm from './components/ProductForm'
 import NotFound from './components/NotFound'
 
@@ -19,7 +18,7 @@ import { connect } from 'react-redux'
 class App extends Component {
 
   componentDidMount() {
-    ProductAdapter.getProducts()
+
   }
 
   handleLogOut() {

@@ -1,12 +1,12 @@
-import productReducer from './productReducer';
 import storeReducer from './storeReducer';
 import vendorReducer from './vendorReducer';
+import userReducer from './userReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
-  products: productReducer,
   stores: storeReducer,
-  vendor: vendorReducer
+  vendor: vendorReducer,
+  user: userReducer
 })
 
 // state.productReducer.products....

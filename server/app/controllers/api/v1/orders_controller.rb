@@ -30,7 +30,7 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:name, :description, :sku, :cost, :inventory, :order_id, :photo)
+    params.permit(:user_id)
   end
 
   def find_order
