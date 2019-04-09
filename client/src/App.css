@@ -48,11 +48,10 @@ body > div, body > div > div, body > div > div > div.login-form {
   height: 100%;
 }
 
-div.ui.card {
-  margin: 5px;
-  margin-bottom: 10px !important;
+a.ui.card, div.ui.card {
+  margin: 5px !important;
+  margin-bottom: 5px !important;
 }
-
 
 .container {
   margin-top: 10%;

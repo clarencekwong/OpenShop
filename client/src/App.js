@@ -7,6 +7,7 @@ import RegisterContainer from './containers/RegisterContainer'
 import StoreContainer from './containers/StoreContainer'
 import StoreForm from './components/StoreForm'
 import ProductContainer from './containers/ProductContainer'
+import CartContainer from './containers/CartContainer'
 import ProductForm from './components/ProductForm'
 import NotFound from './components/NotFound'
 
@@ -36,7 +37,7 @@ class App extends Component {
           <Menu.Item as={NavLink} to="/stores/new" content="Create Stores" />
           <Menu.Item as={NavLink} to="/product/new" content="Create Product" />
           <Menu.Menu position="right">
-            <Menu.Item as="a">
+            <Menu.Item as={NavLink} to="/cart">
               <Icon name="shopping cart" />
             </Menu.Item>
             <Menu.Item as={NavLink} to="/login" content="Log In" />
@@ -50,6 +51,7 @@ class App extends Component {
         <Switch>
           <Route path="/stores" exact component={StoreContainer} />
           <Route path="/stores/new" component={StoreForm} />
+          <Route path="/cart" component={CartContainer} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
           {this.props.selectedStore ? <Route path={`/${this.props.selectedStore.name}`} component={ProductContainer} /> : null}

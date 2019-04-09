@@ -20,12 +20,21 @@ class Api::V1::AuthController < ApplicationController
     end
   end
 
-  def auto_login
+  def auto_userlogin
     user = curr_user
     if user
       render json: user
     else
-      render json: {errors: "I dont think so"}
+      render json: {errors: "Please log in first"}
+    end
+  end
+
+  def auto_vendorlogin
+    vendor = curr_vendor
+    if vendor
+      render json: vendor
+    else
+      render json: {errors: "Please log in first"}
     end
   end
 end

@@ -30,7 +30,7 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:user_id)
+    params.permit(:user_id, :status)
   end
 
   def find_order

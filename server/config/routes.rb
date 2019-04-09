@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :stores, only: [:index, :update, :create, :show]
       resources :users, only: [:index, :update, :create, :show]
       resources :vendors, only: [:index, :update, :create]
-      resources :orders, only: [:index, :update, :create]
+      resources :orders, only: [:index, :update, :create, :show]
       resources :items, only: [:index, :update, :create]
       post '/userlogin', to: 'auth#userlogin'
       get '/userlogin', to: 'auth#auto_login'

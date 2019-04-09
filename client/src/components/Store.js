@@ -4,7 +4,7 @@ import { Card, Image } from 'semantic-ui-react'
 import StoreAdapter from '../adapters/StoreAdapter'
 
 const Store = (props) => {
-
+  
   const handleClick = () => {
     StoreAdapter.selectStore(props.store, props.history)
   }

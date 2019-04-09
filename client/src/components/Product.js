@@ -10,7 +10,7 @@ const Product = (props) => {
     const data = {
       user_id: props.user.id
     }
-    fetch('http://localhost:3000/api/v1/orders', {
+    return fetch('http://localhost:3000/api/v1/orders', {
       method: 'POST',
       headers: {
         'Content-Type':'application/json',
@@ -22,15 +22,7 @@ const Product = (props) => {
     .then(order => localStorage.setItem('order_id', order.id))
   }
 
-  const handleClick = () => {
-    if (!localStorage.getItem('order_id')) {
-      createOrder()
-    }
-    const data = {
-      product_id: props.product.id,
-      order_id: localStorage.getItem('order_id'),
-    }
-
+  const addToCart = (data) => {
     fetch('http://localhost:3000/api/v1/items', {
       method: 'POST',
       headers: {
@@ -41,10 +33,30 @@ const Product = (props) => {
     })
   }
 
+  const handleClick = () => {
+    if (!localStorage.getItem('order_id')) {
+      createOrder()
+      .then(() => {
+        const data = {
+          product_id: props.product.id,
+          order_id: localStorage.getItem('order_id'),
+        }
+        addToCart(data)
+      })
+    } else {
+      const data = {
+        product_id: props.product.id,
+        order_id: localStorage.getItem('order_id'),
+      }
+      addToCart(data)
+    }
+  }
+
   return (
     <div>
       <Card>
         <Image src={props.product.imageUrl} />
+        <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"/>
         <Card.Content>
           <Card.Header>{props.product.name}</Card.Header>
           <Card.Description>{props.product.description}</Card.Description>
