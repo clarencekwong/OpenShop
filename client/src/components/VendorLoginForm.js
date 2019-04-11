@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
 
 import { connect } from 'react-redux'
 
@@ -9,6 +9,8 @@ class VendorLoginForm extends React.Component {
   state = {
 		email: "",
 		password: "",
+    error: false,
+    errMsg: ''
 	}
 
 	handleChange = (event) => {
@@ -18,18 +20,23 @@ class VendorLoginForm extends React.Component {
 	}
 
 	handleSubmit = () => {
+    this.setState({ error: false, response: '' })
+    const data = {
+      email: this.state.email,
+  		password: this.state.password
+    }
 		fetch("http://localhost:3000/api/v1/vendorlogin", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"Accepts": "application/json",
 			},
-			body: JSON.stringify(this.state)
+			body: JSON.stringify(data)
 		})
 		.then(res => res.json())
 		.then((response) => {
 			if (response.errors) {
-				alert(response.errors)
+				this.setState({ error: true, errMsg: response.errors })
 			} else {
         this.props.dispatch({type: "SET_VENDOR", payload: response.vendor.id})
         localStorage.setItem('vendor_id', response.jwt)
@@ -51,6 +58,7 @@ class VendorLoginForm extends React.Component {
   render() {
     return (
       <div className='login-form'>
+        {this.state.error ? <Message error header="Authentication error" content={this.state.errMsg}/> : null}
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' textAlign='center'>

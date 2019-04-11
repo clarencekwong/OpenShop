@@ -12,6 +12,8 @@ function storeReducer(state = initialStoreState, action) {
       return {...state, storeProducts: action.payload}
     case "SELECT_STORE":
       return {...state, selectedStore: action.payload}
+    case "FETCH_PRODUCT":
+      return {...state, product: action.payload}
     default:
       return state
   }

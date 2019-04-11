@@ -12,7 +12,8 @@ class StoreAdapter {
   }
 
   static getStoreProducts(store_id) {
-    fetch(`${this.STORE_URL}/${store_id}`)
+    console.log('fired')
+    return fetch(`${this.STORE_URL}/${store_id}`)
       .then(res => res.json())
       .then(products => {
         store.dispatch({type: 'FETCH_STORE_PRODUCTS', payload: products.products})

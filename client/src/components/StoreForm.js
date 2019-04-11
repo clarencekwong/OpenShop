@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -36,13 +36,13 @@ class StoreForm extends React.Component {
 
   render() {
     return (
-      <div className="regForm">
+      <Container>
         <Form onSubmit={this.handleSubmit}>
           <Form.Input onChange={this.handleChange} fluid name="name" label='Store name' placeholder='Store name' />
           <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Store Image' />
           <Form.Button>Submit</Form.Button>
         </Form>
-      </div>
+      </Container>
     )
   }
 }

@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :find_product, only: [:update, :show]
+  before_action :find_product, only: [:update, :show, :destroy]
   def index
     @products = Product.all
     render json: @products
@@ -7,6 +7,11 @@ class Api::V1::ProductsController < ApplicationController
 
   def show
     render json: @product
+  end
+
+  def destroy
+    @product.destroy
+    render body: nil, status: :no_content
   end
 
   def create

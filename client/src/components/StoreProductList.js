@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Card } from 'semantic-ui-react'
 
 import StoreProduct from './StoreProduct'
-import StoreAdapter from '../adapters/StoreAdapter'
 
 class StoreProductList extends React.Component {
 

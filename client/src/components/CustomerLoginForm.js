@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
 
 import { connect } from 'react-redux'
 
@@ -9,6 +9,8 @@ class CustomerLoginForm extends React.Component {
   state = {
 		email: "",
 		password: "",
+    error: false,
+    errMsg: ''
 	}
 
 	handleChange = (event) => {
@@ -18,18 +20,23 @@ class CustomerLoginForm extends React.Component {
 	}
 
 	handleSubmit = () => {
+    this.setState({ error: false, response: '' })
+    const data = {
+      email: this.state.email,
+  		password: this.state.password
+    }
 		fetch("http://localhost:3000/api/v1/userlogin", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				"Accepts": "application/json",
 			},
-			body: JSON.stringify(this.state)
+			body: JSON.stringify(data)
 		})
 		.then(res => res.json())
 		.then((response) => {
 			if (response.errors) {
-				alert(response.errors)
+				this.setState({ error: true, errMsg: response.errors })
 			} else {
 				localStorage.setItem('user_id', response.jwt)
         UserAdapter.setUser(response.user.id)
@@ -40,6 +47,7 @@ class CustomerLoginForm extends React.Component {
           if (activeOrder) {
             localStorage.setItem('order_id', activeOrder.id)
           }
+          this.props.history.push('/')
         })
 			}
 		})
@@ -47,13 +55,13 @@ class CustomerLoginForm extends React.Component {
       email: "",
   		password: ""
     })
-    this.props.history.push('/')
 	}
 
 
   render() {
     return (
       <div className='login-form'>
+        {this.state.error ? <Message error header="Authentication error" content={this.state.errMsg}/> : null}
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' textAlign='center'>

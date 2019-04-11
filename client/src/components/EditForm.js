@@ -1,14 +1,17 @@
 import React from 'react'
+
 import { Form, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
-class ProductForm extends React.Component {
+import StoreAdapter from '../adapters/StoreAdapter'
+
+class EditForm extends React.Component {
   state = {
-    name: '',
-    description: '',
-    sku: '',
-    cost: '',
-    inventory: '',
+    name: this.props.product.name,
+    description: this.props.product.description,
+    sku: this.props.product.sku,
+    cost: this.props.product.cost,
+    inventory: this.props.product.inventory,
     photo: null
   }
 
@@ -32,10 +35,11 @@ class ProductForm extends React.Component {
     formData.append('sku', this.state.sku)
     formData.append('cost', this.state.cost)
     formData.append('inventory', this.state.inventory)
-    formData.append('photo', this.state.photo)
-    formData.append('store_id', this.props.myStore.store.id)
-    fetch("http://localhost:3000/api/v1/products", {
-      method: "POST",
+    if (this.state.photo) {
+      formData.append('photo', this.state.photo)
+    }
+    fetch(`http://localhost:3000/api/v1/products/${this.props.product.id}`, {
+      method: "PATCH",
       body: formData
     })
     this.setState({
@@ -47,9 +51,13 @@ class ProductForm extends React.Component {
       photo: null
     })
     e.target.reset()
+    StoreAdapter.getStoreProducts(this.props.myStore.store.id)
+    .then(()=>{
+      this.props.history.push('/product')
+    })
   }
 
-  render() {
+  render () {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
@@ -68,8 +76,9 @@ class ProductForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    product: state.product.product,
     myStore: state.user.vendor
   }
 }
 
-export default connect(mapStateToProps)(ProductForm)
+export default connect(mapStateToProps)(EditForm)

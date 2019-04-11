@@ -53,6 +53,11 @@ a.ui.card, div.ui.card {
   margin-bottom: 5px !important;
 }
 
+div.ui.card {
+  max-height: 300px;
+  height: 100%;
+}
+
 .container {
   margin-top: 10%;
   text-align: center;

@@ -14,7 +14,6 @@ class StoreList extends React.Component {
   }
 
   renderStores = () => {
-    console.log('in store list',this.props);
     return this.props.stores.map(store => <Store key={uuid()} store={store} history={this.props.history}/>)
   }
 

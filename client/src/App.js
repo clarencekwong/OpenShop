@@ -6,6 +6,7 @@ import LoginContainer from './containers/LoginContainer'
 import RegisterContainer from './containers/RegisterContainer'
 import StoreContainer from './containers/StoreContainer'
 import StoreForm from './components/StoreForm'
+import EditForm from './components/EditForm'
 import ProductContainer from './containers/ProductContainer'
 import StoreProductContainer from './containers/StoreProductContainer'
 import CartContainer from './containers/CartContainer'
@@ -72,9 +73,6 @@ class App extends Component {
             }
             { this.props.logged_in ? <Menu.Item as={NavLink} to="/home" onClick={this.handleLogOut} content="Log Out" /> : null }
           </Menu.Menu>
-          <Menu.Item>
-            <Icon name="sidebar" />
-          </Menu.Item>
         </Menu>
         <Switch>
           <Route path="/stores" exact component={StoreContainer} />
@@ -84,6 +82,7 @@ class App extends Component {
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
           {this.props.selectedStore ? <Route path={`/${this.props.selectedStore.name}`} component={ProductContainer} /> : null}
+          <Route path="/product/:id/edit" component={EditForm} />
           <Route path="/product/new" component={ProductForm} />
           <Route path="/home" component={HomePage} />
           <Route path="/" exact component={HomePage} />
