@@ -30,6 +30,14 @@ class VendorRegistrationForm extends React.Component {
       },
       body: JSON.stringify(data)
     })
+    .then(r => r.json())
+    .then(response => {
+      if (response.errors) {
+				alert(response.errors)
+			} else {
+				this.props.history.push('/login')
+			}
+    })
     this.setState({
       company: '',
       email: '',

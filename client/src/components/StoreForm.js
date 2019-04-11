@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 class StoreForm extends React.Component {
   state = {
@@ -24,13 +25,13 @@ class StoreForm extends React.Component {
     e.preventDefault()
     const formData = new FormData();
     formData.append('name', this.state.name)
+    formData.append('vendor_id', this.props.vendor.id)
     formData.append('photo', this.state.photo)
-    formData.append('vendor_id', this.props.selectedStore.id)
-    fetch("http://localhost:3000/api/v1/products", {
+    fetch("http://localhost:3000/api/v1/stores", {
       method: "POST",
       body: formData
     })
-
+    return <Redirect to='/'/>
   }
 
   render() {
@@ -48,7 +49,7 @@ class StoreForm extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    selectedStore: state.stores.selectedStore
+    vendor: state.user.vendor
   }
 }
 

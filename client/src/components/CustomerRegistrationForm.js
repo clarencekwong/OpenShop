@@ -31,7 +31,13 @@ class CustomerRegistrationForm extends React.Component {
       body: JSON.stringify(data)
     })
     .then(r => r.json())
-    .then(console.log)
+    .then(response => {
+      if (response.errors) {
+				alert(response.errors)
+			} else {
+				this.props.history.push('/login')
+			}
+    })
     this.setState({
       name: '',
       email: '',

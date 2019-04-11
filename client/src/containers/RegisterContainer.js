@@ -9,8 +9,8 @@ export default class RegisterContainer extends React.Component {
   render() {
     return (
       <Container>
-        <CustomerRegistrationForm />
-        <VendorRegistrationForm />
+        <CustomerRegistrationForm history={this.props.history}/>
+        <VendorRegistrationForm history={this.props.history}/>
       </Container>
     )
   }

@@ -8,13 +8,10 @@ import StoreAdapter from '../adapters/StoreAdapter'
 class ProductContainer extends React.Component {
 
   componentDidMount() {
-    console.log(this.props.selectedStore)
     if (this.props.selectedStore) {
-      console.log('i fired when i mounted');
       return StoreAdapter.getStoreProducts(this.props.selectedStore.id)
     }
     return null
-
   }
 
   render() {

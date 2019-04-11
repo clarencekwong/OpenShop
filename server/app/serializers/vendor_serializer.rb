@@ -1,4 +1,4 @@
 class VendorSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :company
   has_one :store
 end

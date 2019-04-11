@@ -23,7 +23,6 @@ class StoreAdapter {
     fetch(`${this.STORE_URL}/${chose_store.id}`)
       .then(res => res.json())
       .then(selectedStore => {
-        console.log('selectStore fired')
         store.dispatch({type: 'SELECT_STORE', payload: selectedStore})
       })
       .then(x => history.push(`/${chose_store.name}`))

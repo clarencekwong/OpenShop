@@ -9,8 +9,8 @@ export default class LoginContainer extends React.Component {
   render() {
     return (
       <Container>
-        <CustomerLoginForm />
-        <VendorLoginForm />
+        <CustomerLoginForm history={this.props.history}/>
+        <VendorLoginForm history={this.props.history}/>
       </Container>
     )
   }

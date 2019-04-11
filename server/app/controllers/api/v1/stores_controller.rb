@@ -30,7 +30,7 @@ class Api::V1::StoresController < ApplicationController
   private
 
   def store_params
-    params.permit(:name, :description, :sku, :cost, :inventory, :store_id, :photo)
+    params.permit(:name, :vendor_id, :photo)
   end
 
   def find_store

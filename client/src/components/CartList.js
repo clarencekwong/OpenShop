@@ -3,7 +3,7 @@ import uuid from 'uuid'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { Table, Button, Container } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 
 import Cart from './Cart'
 import CartAdapter from '../adapters/CartAdapter'
@@ -35,8 +35,8 @@ class CartList extends React.Component {
     })
     .then(r => r.json())
     .then(r => {
-      console.log(r)
       localStorage.removeItem('order_id')
+      CartAdapter.submitCart()
     })
   }
 

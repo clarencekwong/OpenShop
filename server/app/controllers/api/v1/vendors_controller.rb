@@ -1,8 +1,12 @@
 class Api::V1::VendorsController < ApplicationController
-  before_action :find_vendor, only: [:update]
+  before_action :find_vendor, only: [:update, :show]
   def index
     @vendors = Vendor.all
     render json: @vendors
+  end
+
+  def show
+    render json: @vendor
   end
 
   def create

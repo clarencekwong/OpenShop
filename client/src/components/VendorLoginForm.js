@@ -3,7 +3,7 @@ import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 import { connect } from 'react-redux'
 
-// import store from '../store'
+import UserAdapter from '../adapters/UserAdapter'
 
 class VendorLoginForm extends React.Component {
   state = {
@@ -31,9 +31,14 @@ class VendorLoginForm extends React.Component {
 			if (response.errors) {
 				alert(response.errors)
 			} else {
-        console.log(this.props)
-        this.props.dispatch({type: "STORE_VENDOR", payload: response.user.id})
-				localStorage.setItem('vendor_id', response.jwt)
+        this.props.dispatch({type: "SET_VENDOR", payload: response.vendor.id})
+        localStorage.setItem('vendor_id', response.jwt)
+        UserAdapter.setVendor(response.vendor.id)
+        if (!response.vendor.store) {
+          UserAdapter.storeCreated()
+        }
+        UserAdapter.logUser()
+        this.props.history.push('/')
 			}
 		})
     this.setState({
@@ -49,7 +54,7 @@ class VendorLoginForm extends React.Component {
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' textAlign='center'>
-              Log-in to your account
+              Log-in as a vendor
             </Header>
             <Form size='large' onSubmit={this.handleSubmit}>
               <Segment stacked>

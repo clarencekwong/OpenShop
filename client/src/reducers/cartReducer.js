@@ -8,7 +8,7 @@ function cartReducer(state = initialCartState, action) {
     case "FETCH_CART":
       return {...state, cart: action.payload}
     case "SUBMIT_CART":
-      return {...state, cart: action.payload}
+      return {...state, cart: []}
     default:
       return state
   }

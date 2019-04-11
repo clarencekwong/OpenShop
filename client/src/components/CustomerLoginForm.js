@@ -17,10 +17,6 @@ class CustomerLoginForm extends React.Component {
 		})
 	}
 
-  checkOrder = () => {
-
-  }
-
 	handleSubmit = () => {
 		fetch("http://localhost:3000/api/v1/userlogin", {
 			method: "POST",
@@ -37,6 +33,7 @@ class CustomerLoginForm extends React.Component {
 			} else {
 				localStorage.setItem('user_id', response.jwt)
         UserAdapter.setUser(response.user.id)
+        UserAdapter.logUser()
         UserAdapter.getUserOrders(response.user.id)
         .then(() => {
           const activeOrder = this.props.orders.find(order => order.status === false)
@@ -50,6 +47,7 @@ class CustomerLoginForm extends React.Component {
       email: "",
   		password: ""
     })
+    this.props.history.push('/')
 	}
 
 
@@ -59,7 +57,7 @@ class CustomerLoginForm extends React.Component {
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' textAlign='center'>
-              Log-in to your account
+              Log-in as a consumer
             </Header>
             <Form size='large' onSubmit={this.handleSubmit}>
               <Segment stacked>
