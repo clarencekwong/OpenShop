@@ -2,6 +2,7 @@ import store from '../store'
 
 class CartAdapter {
   static ORDER_URL = 'http://localhost:3000/api/v1/orders'
+  static TRANSACTION_URL = 'http://localhost:3000/api/v1/transactions'
 
   static getCart(order_id) {
     return fetch(`${this.ORDER_URL}/${order_id}`)
@@ -13,6 +14,26 @@ class CartAdapter {
 
   static submitCart() {
     store.dispatch({type: 'SUBMIT_CART'})
+  }
+
+  static createTransactions(data) {
+    fetch (`${this.TRANSACTION_URL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'Accepts':'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+  }
+
+  static fetchTransactions(user_id) {
+    fetch (`${this.TRANSACTION_URL}`)
+    .then(res => res.json())
+    .then(transactions => {
+      const userTransactions = transcations.filter(transaction => transaction.id === user_id)
+      store.dispatch({type: 'FETCH_TRANSACTION', payload: userTransactions})
+    })
   }
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Card, Image, Button, Icon, Label } from 'semantic-ui-react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import ProductAdapter from '../adapters/ProductAdapter'

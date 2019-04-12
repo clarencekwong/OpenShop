@@ -21,10 +21,14 @@ class CartList extends React.Component {
   }
 
   handleClick = () => {
-    console.log('clicked')
     const data = {
       status: true
     }
+    const transactionData = {
+      user_id: this.props.order.user_id,
+      total: this.props.order.total_cost
+    }
+    CartAdapter.createTransactions(transactionData)
     fetch(`http://localhost:3000/api/v1/orders/${localStorage.getItem('order_id')}`, {
       method: "PATCH",
       headers: {
@@ -63,6 +67,7 @@ class CartList extends React.Component {
               </Table.Body>
             </Table>
             <Button as={NavLink} to="/" style={{float:"right"}} onClick={this.handleClick}>Check Out</Button>
+            <Button as={NavLink} to="/" style={{float:"right"}} onClick={this.handleClick}>Delete Cart</Button>
           </React.Fragment> :
           <React.Fragment>
             <h3>Cart is empty</h3>

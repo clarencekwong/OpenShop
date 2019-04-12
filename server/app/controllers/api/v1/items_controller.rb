@@ -5,10 +5,6 @@ class Api::V1::ItemsController < ApplicationController
     render json: @items
   end
 
-  def show
-    render json: @item
-  end
-
   def create
     current_item = Item.find_by({product_id: params[:product_id], order_id: params[:order_id]})
     if current_item

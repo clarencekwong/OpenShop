@@ -1,5 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
-  before_action :find_order, only: [:update, :show]
+  before_action :find_order, only: [:update, :show, :order]
   def index
     @orders = Order.all
     render json: @orders
@@ -7,6 +7,11 @@ class Api::V1::OrdersController < ApplicationController
 
   def show
     render json: @order
+  end
+
+  def destroy
+    @order.destroy
+    render body: nil, status: :no_content
   end
 
   def create
