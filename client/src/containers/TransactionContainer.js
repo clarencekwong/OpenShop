@@ -1,19 +1,26 @@
 import React from 'react'
 
-import '../components/TransactionList'
-import '../adapters/CartAdapter'
+import TransactionList from '../components/TransactionList'
+import CartAdapter from '../adapters/CartAdapter'
+// import UserAdapter from '../adapters/UserAdapter'
 
 import { connect } from 'react-redux'
+import { Container } from 'semantic-ui-react'
 
 class TransactionContainer extends React.Component {
 
   componentDidMount() {
-    CartAdapter.fetchTransactions(this.props.user.id)
+    if (this.props.user) {
+      CartAdapter.fetchTransactions(this.props.user.id)
+    }
   }
 
   render () {
     return (
-      <TransactionList  />
+      <Container>
+        <h3>Previous Transactions</h3>
+        <TransactionList  />
+      </Container>
     )
   }
 }
@@ -24,4 +31,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default TransactionContainer;
+export default connect(mapStateToProps)(TransactionContainer)

@@ -28,10 +28,11 @@ class CartAdapter {
   }
 
   static fetchTransactions(user_id) {
+    console.log('fetching transactions')
     fetch (`${this.TRANSACTION_URL}`)
     .then(res => res.json())
     .then(transactions => {
-      const userTransactions = transcations.filter(transaction => transaction.id === user_id)
+      const userTransactions = transactions.filter(transaction => transaction.user_id === user_id)
       store.dispatch({type: 'FETCH_TRANSACTION', payload: userTransactions})
     })
   }

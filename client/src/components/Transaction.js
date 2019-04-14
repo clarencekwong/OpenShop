@@ -1,14 +1,13 @@
 import React from 'react'
 
-import { Item } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 const Transaction = (props) => {
-  console.log(props)
   return (
-    <Item>
-      {props.transaction.id}
-      {props.transaction.cost}
-    </Item>
+    <Table.Row>
+      <Table.Cell>{props.transaction.id}</Table.Cell>
+      <Table.Cell>${props.transaction.total}</Table.Cell>
+    </Table.Row>
   )
 }
 

@@ -9,6 +9,7 @@ import StoreForm from './components/StoreForm'
 import EditForm from './components/EditForm'
 import ProductContainer from './containers/ProductContainer'
 import StoreProductContainer from './containers/StoreProductContainer'
+import TransactionContainer from './containers/TransactionContainer'
 import CartContainer from './containers/CartContainer'
 import ProductForm from './components/ProductForm'
 import NotFound from './components/NotFound'
@@ -18,10 +19,12 @@ import 'semantic-ui-css/semantic.min.css'
 import { Menu, Image, Icon } from "semantic-ui-react"
 import { Route, NavLink, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Script from 'react-load-script'
 
 class App extends Component {
+  state = {}
 
-  componentDidMount() {
+  componentWillMount() {
     if (localStorage.getItem('user_id')) {
       UserAdapter.autoLoginUser()
       UserAdapter.logUser()
@@ -38,11 +41,29 @@ class App extends Component {
     UserAdapter.resetStoreToggle()
   }
 
+  handleScriptCreate() {
+    this.setState({ scriptLoaded: false })
+  }
+
+  handleScriptError() {
+    this.setState({ scriptError: true })
+  }
+
+  handleScriptLoad() {
+    this.setState({ scriptLoaded: true })
+  }
+
   render() {
-    // const jwtUser = localStorage.getItem('user_id')
+    const jwtUser = localStorage.getItem('user_id')
     const jwtVendor = localStorage.getItem('vendor_id')
     return (
       <div className="App">
+        <Script
+          url="https://js.stripe.com/v3/"
+          onCreate={this.handleScriptCreate.bind(this)}
+          onError={this.handleScriptError.bind(this)}
+          onLoad={this.handleScriptLoad.bind(this)}
+        />
         <Menu fixed="top" inverted>
           <Menu.Item as={NavLink} to="/">
             <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
@@ -57,6 +78,7 @@ class App extends Component {
             : null
           }
           <Menu.Menu position="right">
+            { jwtUser ? <Menu.Item as={NavLink} to="/transactions" content="Transactions" /> : null}
             { jwtVendor ? null :
             <React.Fragment>
               <Menu.Item as={NavLink} to="/cart">
@@ -81,6 +103,7 @@ class App extends Component {
           <Route path="/cart" component={CartContainer} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/register" component={RegisterContainer} />
+          <Route path="/transactions" component={TransactionContainer} />
           {this.props.selectedStore ? <Route path={`/${this.props.selectedStore.name}`} component={ProductContainer} /> : null}
           <Route path="/product/:id/edit" component={EditForm} />
           <Route path="/product/new" component={ProductForm} />

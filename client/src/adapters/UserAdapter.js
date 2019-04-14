@@ -52,7 +52,7 @@ class UserAdapter {
 
   static autoLoginUser() {
     const jwtUser = localStorage.getItem('user_id')
-    fetch(`http://localhost:3000/api/v1/userlogin`, {
+    return fetch(`http://localhost:3000/api/v1/userlogin`, {
       headers: {
         "Authorization": jwtUser
       }
