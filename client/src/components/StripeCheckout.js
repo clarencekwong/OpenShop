@@ -3,7 +3,7 @@ import { Elements } from 'react-stripe-elements';
 
 import InjectedCheckoutForm from './CheckoutForm';
 
-class MyStoreCheckout extends React.Component {
+class StripeCheckout extends React.Component {
   render() {
     return (
       <Elements>
@@ -13,4 +13,4 @@ class MyStoreCheckout extends React.Component {
   }
 }
 
-export default MyStoreCheckout;
+export default StripeCheckout;

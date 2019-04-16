@@ -27,10 +27,15 @@ class Api::V1::VendorsController < ApplicationController
     end
   end
 
+  def orderedProducts
+    @vendor = Vendor.find(params[:vendor_id])
+    render json: @vendor.myOrders
+  end
+
   private
 
   def vendor_params
-    params.permit(:company, :email, :password)
+    params.permit(:company, :email, :password, :vendor_id)
   end
 
   def find_vendor

@@ -3,7 +3,8 @@ const initialUserState = {
   orders: [],
   logged_in: false,
   vendor: null,
-  storeCreated: true
+  storeCreated: true,
+  storeOrders: []
 }
 
 function userReducer(state = initialUserState, action) {
@@ -22,6 +23,8 @@ function userReducer(state = initialUserState, action) {
       return {...state, storeCreated: false}
     case "STORE_RESET":
       return {...state, storeCreated: true}
+    case "STORE_ORDER":
+      return {...state, storeOrders: action.payload}
     default:
       return state
   }

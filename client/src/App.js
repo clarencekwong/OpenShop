@@ -11,6 +11,8 @@ import ProductContainer from './containers/ProductContainer'
 import StoreProductContainer from './containers/StoreProductContainer'
 import TransactionContainer from './containers/TransactionContainer'
 import CartContainer from './containers/CartContainer'
+import DashboardContainer from './containers/DashboardContainer'
+// import StripeContainer from './containers/StripeContainer'
 import ProductForm from './components/ProductForm'
 import NotFound from './components/NotFound'
 import UserAdapter from './adapters/UserAdapter'
@@ -24,14 +26,16 @@ import Script from 'react-load-script'
 class App extends Component {
   state = {}
 
-  componentWillMount() {
+  componentDidMount() {
     if (localStorage.getItem('user_id')) {
       UserAdapter.autoLoginUser()
       UserAdapter.logUser()
     }
     if (localStorage.getItem('vendor_id')) {
+      console.log('grabbing vendor')
       UserAdapter.autoLoginVendor()
       UserAdapter.logUser()
+
     }
   }
 
@@ -79,6 +83,8 @@ class App extends Component {
           }
           <Menu.Menu position="right">
             { jwtUser ? <Menu.Item as={NavLink} to="/transactions" content="Transactions" /> : null}
+            {/*<Menu.Item as={NavLink} to="/checkout" content="Checkout" />*/}
+            <Menu.Item as={NavLink} to="/dashboard" content="Dashboard" />
             { jwtVendor ? null :
             <React.Fragment>
               <Menu.Item as={NavLink} to="/cart">
@@ -101,7 +107,9 @@ class App extends Component {
           <Route path="/stores/new" component={StoreForm} />
           <Route path="/product" exact component={StoreProductContainer} />
           <Route path="/cart" component={CartContainer} />
+          {/*<Route path="/checkout" component={StripeContainer} />*/}
           <Route path="/login" component={LoginContainer} />
+          <Route path="/dashboard" component={DashboardContainer} />
           <Route path="/register" component={RegisterContainer} />
           <Route path="/transactions" component={TransactionContainer} />
           {this.props.selectedStore ? <Route path={`/${this.props.selectedStore.name}`} component={ProductContainer} /> : null}
@@ -120,7 +128,8 @@ function mapStateToProps(state) {
   return {
     selectedStore: state.stores.selectedStore,
     logged_in: state.user.logged_in,
-    storeCreated: state.user.storeCreated
+    storeCreated: state.user.storeCreated,
+    vendor: state.user.vendor
   }
 }
 

@@ -10,5 +10,3 @@ export default combineReducers({
   cart: cartReducer,
   product: productReducer
 })
-
-// state.productReducer.products....

@@ -70,7 +70,7 @@ class UserAdapter {
 
   static autoLoginVendor() {
     const jwtVendor = localStorage.getItem('vendor_id')
-    fetch(`http://localhost:3000/api/v1/vendorlogin`, {
+    return fetch(`http://localhost:3000/api/v1/vendorlogin`, {
       headers: {
         "Authorization": jwtVendor
       }
@@ -85,8 +85,25 @@ class UserAdapter {
            UserAdapter.storeCreated()
          } else {
            StoreAdapter.getStoreProducts(response.store.id)
+           UserAdapter.storeOrders(response.id)
          }
        }
+    })
+  }
+
+  static storeOrders(vendor_id) {
+    console.log('fired')
+    fetch('http://localhost:3000/api/v1/storeorders', {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'Accepts':'application/json'
+      },
+      body: JSON.stringify({vendor_id: vendor_id})
+    })
+    .then(res => res.json())
+    .then(orders => {
+      store.dispatch({type: 'STORE_ORDER', payload: orders})
     })
   }
 }
