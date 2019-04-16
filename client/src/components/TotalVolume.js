@@ -1,4 +1,5 @@
 import React from 'react'
+import PieCharts from './PieCharts'
 
 import { Grid, Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
@@ -17,6 +18,22 @@ class TotalVolume extends React.Component {
     }
   }
 
+  formatCostData = () => {
+    let data = []
+    this.props.storeOrders.forEach(order => {
+      data.push({name: order.name, value: order.cost * order.quantity})
+    })
+    return data
+  }
+
+  formatQuantityData = () => {
+    let data = []
+    this.props.storeOrders.forEach(order => {
+      data.push({name: order.name, value: order.quantity})
+    })
+    return data
+  }
+
   render () {
     return(
       <Grid.Row textAlign='center'>
@@ -25,12 +42,14 @@ class TotalVolume extends React.Component {
             Total Sale Volume
           </Header>
           <Header as='h1'>{this.totalSaleVolume()} units</Header>
+          {<PieCharts data={this.formatQuantityData()}/>}
         </Grid.Column>
         <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
           <Header as='h3' style={{ fontSize: '2em' }}>
             Total Net Income
           </Header>
           <Header as='h1'>${this.totalNetIncome()}</Header>
+          {<PieCharts data={this.formatCostData()}/>}
         </Grid.Column>
       </Grid.Row>
     )
