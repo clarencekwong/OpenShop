@@ -32,7 +32,6 @@ class App extends Component {
       UserAdapter.logUser()
     }
     if (localStorage.getItem('vendor_id')) {
-      console.log('grabbing vendor')
       UserAdapter.autoLoginVendor()
       UserAdapter.logUser()
 
@@ -84,7 +83,7 @@ class App extends Component {
           <Menu.Menu position="right">
             { jwtUser ? <Menu.Item as={NavLink} to="/transactions" content="Transactions" /> : null}
             {/*<Menu.Item as={NavLink} to="/checkout" content="Checkout" />*/}
-            <Menu.Item as={NavLink} to="/dashboard" content="Dashboard" />
+            { jwtVendor ? <Menu.Item as={NavLink} to="/dashboard" content="Dashboard" /> : null}
             { jwtVendor ? null :
             <React.Fragment>
               <Menu.Item as={NavLink} to="/cart">

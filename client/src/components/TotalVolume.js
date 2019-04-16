@@ -18,7 +18,6 @@ class TotalVolume extends React.Component {
   }
 
   render () {
-    console.log(this.props.storeOrders)
     return(
       <Grid.Row textAlign='center'>
         <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>

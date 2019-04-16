@@ -1,5 +1,6 @@
 import React from 'react'
 import TotalVolume from '../components/TotalVolume'
+import DashboardProductList from '../components/DashboardProductList'
 
 import { Grid, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
@@ -12,7 +13,7 @@ class DashboardContainer extends React.Component {
         <Grid celled='internally' columns='equal' stackable>
           {<TotalVolume />}
           <Grid.Row textAlign='center'>
-            Cool times
+            <DashboardProductList />
           </Grid.Row>
         </Grid>
       </Container>
@@ -21,7 +22,6 @@ class DashboardContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.user.vendor)
   return {
     vendor: state.user.vendor
   }

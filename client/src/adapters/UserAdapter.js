@@ -92,7 +92,6 @@ class UserAdapter {
   }
 
   static storeOrders(vendor_id) {
-    console.log('fired')
     fetch('http://localhost:3000/api/v1/storeorders', {
       method: 'POST',
       headers: {
