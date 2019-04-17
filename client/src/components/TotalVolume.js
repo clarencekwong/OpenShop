@@ -24,7 +24,6 @@ class TotalVolume extends React.Component {
       data.push({name: order.name, value: order.cost * order.quantity})
     })
     let filteredData = data.filter(x => x.value > 0)
-    console.log(filteredData)
     return filteredData
   }
 
@@ -34,7 +33,6 @@ class TotalVolume extends React.Component {
       data.push({name: order.name, value: order.quantity})
     })
     let filteredData = data.filter(x => x.value > 0)
-    console.log(filteredData)
     return filteredData
   }
 

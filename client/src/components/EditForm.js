@@ -42,6 +42,10 @@ class EditForm extends React.Component {
       method: "PATCH",
       body: formData
     })
+    .then(()=> {
+      StoreAdapter.getStoreProducts(this.props.myStore.store.id)
+      .then(()=>this.props.history.push('/product'))
+    })
     this.setState({
       name: '',
       description: '',
@@ -51,16 +55,12 @@ class EditForm extends React.Component {
       photo: null
     })
     e.target.reset()
-    StoreAdapter.getStoreProducts(this.props.myStore.store.id)
-    .then(()=>{
-      this.props.history.push('/product')
-    })
   }
 
   render () {
     return (
       <Container>
-        <Segment>
+        <Segment className="forms">
           <Form onSubmit={this.handleSubmit}>
             <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' value={this.state.name} />
             <Form.TextArea onChange={this.handleChange} name="description" label='Product description' placeholder='Product description...' value={this.state.description}/>

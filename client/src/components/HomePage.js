@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import {
-  Button,
   Container,
   Grid,
   Header,
-  Icon,
-  Image,
-  Menu,
   Responsive,
   Segment,
-  Sidebar,
   Visibility,
 } from 'semantic-ui-react'
 
@@ -25,8 +20,8 @@ const HomepageHeading = ({ mobile }) => (
     <Header
       as='h1'
       content='OpenShop'
-      inverted
       style={{
+        color: "#2e86de",
         fontSize: mobile ? '2em' : '4em',
         fontWeight: 'normal',
         marginBottom: 0,
@@ -36,17 +31,13 @@ const HomepageHeading = ({ mobile }) => (
     <Header
       as='h2'
       content='Open your own online store or shop'
-      inverted
       style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
+        color: "#2e86de",
+        fontSize: mobile ? '1.5em' : '2.5em',
         fontWeight: 'normal',
         marginTop: mobile ? '0.5em' : '1.5em',
       }}
     />
-    <Button primary size='huge'>
-      Get Started
-      <Icon name='right arrow' />
-    </Button>
   </Container>
 )
 
@@ -90,73 +81,9 @@ DesktopContainer.propTypes = {
   children: PropTypes.node,
 }
 
-class MobileContainer extends Component {
-  state = {}
-
-  handleSidebarHide = () => this.setState({ sidebarOpened: false })
-
-  handleToggle = () => this.setState({ sidebarOpened: true })
-
-  render() {
-    const { children } = this.props
-    const { sidebarOpened } = this.state
-
-    return (
-      <Responsive
-        as={Sidebar.Pushable}
-        getWidth={getWidth}
-        maxWidth={Responsive.onlyMobile.maxWidth}
-      >
-        <Sidebar
-          as={Menu}
-          animation='push'
-          inverted
-          onHide={this.handleSidebarHide}
-          vertical
-          visible={sidebarOpened}
-        >
-        </Sidebar>
-
-        <Sidebar.Pusher dimmed={sidebarOpened}>
-          <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 350, padding: '1em 0em' }}
-            vertical
-          >
-            <Container>
-              <Menu inverted pointing secondary size='large'>
-                <Menu.Item onClick={this.handleToggle}>
-                  <Icon name='sidebar' />
-                </Menu.Item>
-                <Menu.Item position='right'>
-                  <Button as='a' inverted>
-                    Log in
-                  </Button>
-                  <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            </Container>
-            <HomepageHeading mobile />
-          </Segment>
-
-          {children}
-        </Sidebar.Pusher>
-      </Responsive>
-    )
-  }
-}
-
-MobileContainer.propTypes = {
-  children: PropTypes.node,
-}
-
 const ResponsiveContainer = ({ children }) => (
   <div>
     <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
   </div>
 )
 
@@ -170,18 +97,17 @@ const HomepageLayout = () => (
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Grid.Column>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              We Help Business Owners and Customers
+            <Header as='h3' style={{ fontSize: '2em', color: "#2e86de" }}>
+              We help Business Owners reach the online market
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
+            <p style={{ fontSize: '1.33em', color: "#2e86de" }}>
               You can open your own e-commerce shop and have customers come to you!
             </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              Customers can browse through a bunch of stores advertised and shop to your hearts content!
+            <Header as='h3' style={{ fontSize: '2em', color: "#2e86de" }}>
+              We simplify shopping for customers, all stores on one page
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
+            <p style={{ fontSize: '1.33em', color: "#2e86de" }}>
+              Yes that's right, no more need to look around!
             </p>
           </Grid.Column>
         </Grid.Row>
@@ -191,18 +117,17 @@ const HomepageLayout = () => (
       <Grid celled='internally' columns='equal' stackable>
         <Grid.Row textAlign='center'>
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "What a Company"
+            <Header as='h3' style={{ fontSize: '2em', color: "#2e86de" }}>
+              Simple and intuitive e-commerce solution
             </Header>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
+            <p style={{ fontSize: '1.33em', color: "#2e86de" }}>Make building your online presence easier than ever before</p>
           </Grid.Column>
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
+            <Header as='h3' style={{ fontSize: '2em', color: "#2e86de" }}>
+              Make shopping easy!
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/images/avatar/large/nan.jpg' />
-              <b>Nan</b> Chief Fun Officer Acme Toys
+            <p style={{ fontSize: '1.33em', color: "#2e86de" }}>
+              Browse through all our advertised stores and check them out!
             </p>
           </Grid.Column>
         </Grid.Row>

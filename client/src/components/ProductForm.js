@@ -52,7 +52,7 @@ class ProductForm extends React.Component {
   render() {
     return (
       <Container>
-        <Segment>
+        <Segment className="forms">
           <Form onSubmit={this.handleSubmit}>
             <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' value={this.state.name} />
             <Form.TextArea onChange={this.handleChange} name="description" label='Product description' placeholder='Product description...' value={this.state.description}/>
