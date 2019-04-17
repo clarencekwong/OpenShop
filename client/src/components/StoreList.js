@@ -19,7 +19,7 @@ class StoreList extends React.Component {
 
   render() {
     return (
-      <Card.Group>
+      <Card.Group itemsPerRow="4">
         {this.renderStores()}
       </Card.Group>
     )

@@ -27,6 +27,14 @@ class StoreAdapter {
       })
       .then(x => history.push(`/${chose_store.name}`))
   }
+
+  static selectedStoreRefresh(store_id) {
+    fetch(`${this.STORE_URL}/${store_id}`)
+      .then(res => res.json())
+      .then(selectedStore => {
+        store.dispatch({type: 'SELECT_STORE', payload: selectedStore})
+      })
+  }
 }
 
 export default StoreAdapter

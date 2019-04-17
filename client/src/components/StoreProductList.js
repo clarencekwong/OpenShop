@@ -9,12 +9,12 @@ import StoreProduct from './StoreProduct'
 class StoreProductList extends React.Component {
 
   renderStoreProducts = () => {
-    return this.props.storeProducts.map(product => <StoreProduct key={uuid()} product={product} history={this.props.history}/>)
+    return this.props.storeProducts.sort((a,b) => a.id - b.id).map(product => <StoreProduct key={uuid()} product={product} history={this.props.history}/>)
   }
 
   render() {
     return (
-      <Card.Group>
+      <Card.Group itemsPerRow="4">
         {this.renderStoreProducts()}
       </Card.Group>
     )

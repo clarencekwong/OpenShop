@@ -16,12 +16,12 @@ import DashboardContainer from './containers/DashboardContainer'
 import ProductForm from './components/ProductForm'
 import NotFound from './components/NotFound'
 import UserAdapter from './adapters/UserAdapter'
+import oslogo from './assets/openshop_logo.png'
 
 import 'semantic-ui-css/semantic.min.css'
 import { Menu, Image, Icon } from "semantic-ui-react"
-import { Route, NavLink, Switch } from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Script from 'react-load-script'
 
 class App extends Component {
   state = {}
@@ -34,7 +34,6 @@ class App extends Component {
     if (localStorage.getItem('vendor_id')) {
       UserAdapter.autoLoginVendor()
       UserAdapter.logUser()
-
     }
   }
 
@@ -44,49 +43,31 @@ class App extends Component {
     UserAdapter.resetStoreToggle()
   }
 
-  handleScriptCreate() {
-    this.setState({ scriptLoaded: false })
-  }
-
-  handleScriptError() {
-    this.setState({ scriptError: true })
-  }
-
-  handleScriptLoad() {
-    this.setState({ scriptLoaded: true })
-  }
-
   render() {
     const jwtUser = localStorage.getItem('user_id')
     const jwtVendor = localStorage.getItem('vendor_id')
     return (
       <div className="App">
-        <Script
-          url="https://js.stripe.com/v3/"
-          onCreate={this.handleScriptCreate.bind(this)}
-          onError={this.handleScriptError.bind(this)}
-          onLoad={this.handleScriptLoad.bind(this)}
-        />
-        <Menu fixed="top" inverted>
-          <Menu.Item as={NavLink} to="/">
-            <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+      <Menu fixed="top">
+          <Menu.Item as={Link} to="/">
+            <Image size="mini" src={oslogo} />
           </Menu.Item>
-          { jwtVendor ? null : <Menu.Item as={NavLink} to="/stores" content="Stores" />}
-          { this.props.storeCreated ? null : <Menu.Item as={NavLink} to="/stores/new" content="Create Stores" />}
+          { jwtVendor ? null : <Menu.Item as={Link} to="/stores" content="Stores" />}
+          { this.props.storeCreated ? null : <Menu.Item as={Link} to="/stores/new" content="Create Stores" />}
           { jwtVendor ?
             <React.Fragment>
-              <Menu.Item as={NavLink} to="/product/new" content="Create Product" />
-              <Menu.Item as={NavLink} to="/product" content="My Products" />
+              <Menu.Item as={Link} to="/product/new" content="Create Product" />
+              <Menu.Item as={Link} to="/product" content="My Products" />
             </React.Fragment>
             : null
           }
           <Menu.Menu position="right">
-            { jwtUser ? <Menu.Item as={NavLink} to="/transactions" content="Transactions" /> : null}
-            {/*<Menu.Item as={NavLink} to="/checkout" content="Checkout" />*/}
-            { jwtVendor ? <Menu.Item as={NavLink} to="/dashboard" content="Dashboard" /> : null}
+            { jwtUser ? <Menu.Item as={Link} to="/transactions" content="Transactions" /> : null}
+            {/*<Menu.Item as={Link} to="/checkout" content="Checkout" />*/}
+            { jwtVendor ? <Menu.Item as={Link} to="/dashboard" content="Dashboard" /> : null}
             { jwtVendor ? null :
             <React.Fragment>
-              <Menu.Item as={NavLink} to="/cart">
+              <Menu.Item as={Link} to="/cart">
                 <Icon name="shopping cart" />
               </Menu.Item>
             </React.Fragment>
@@ -94,11 +75,11 @@ class App extends Component {
             { this.props.logged_in ?
               null :
               <React.Fragment>
-                <Menu.Item as={NavLink} to="/login" content="Log In" />
-                <Menu.Item as={NavLink} to="/register" content="Register" />
+                <Menu.Item as={Link} to="/login" content="Log In" />
+                <Menu.Item as={Link} to="/register" content="Register" />
               </React.Fragment>
             }
-            { this.props.logged_in ? <Menu.Item as={NavLink} to="/home" onClick={this.handleLogOut} content="Log Out" /> : null }
+            { this.props.logged_in ? <Menu.Item as={Link} to="/" onClick={this.handleLogOut} content="Log Out" /> : null }
           </Menu.Menu>
         </Menu>
         <Switch>
@@ -114,7 +95,6 @@ class App extends Component {
           {this.props.selectedStore ? <Route path={`/${this.props.selectedStore.name}`} component={ProductContainer} /> : null}
           <Route path="/product/:id/edit" component={EditForm} />
           <Route path="/product/new" component={ProductForm} />
-          <Route path="/home" component={HomePage} />
           <Route path="/" exact component={HomePage} />
           <Route component={NotFound} />
         </Switch>

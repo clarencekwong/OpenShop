@@ -27,7 +27,7 @@ class UserAdapter {
   }
 
   static setVendor(vendor_id) {
-    fetch(`${this.VENDOR_URL}/${vendor_id}`)
+    return fetch(`${this.VENDOR_URL}/${vendor_id}`)
       .then(res => res.json())
       .then(vendor => {
         store.dispatch({type: 'SET_VENDOR', payload: vendor})
@@ -42,8 +42,8 @@ class UserAdapter {
     store.dispatch({type: 'LOGOUT_USER'})
   }
 
-  static storeCreated() {
-    store.dispatch({type: 'STORE_CREATED'})
+  static storeCreated(state) {
+    store.dispatch({type: 'STORE_CREATED', payload: state})
   }
 
   static resetStoreToggle() {
@@ -62,8 +62,11 @@ class UserAdapter {
       if (response.errors) {
          alert(response.errors)
        } else {
+         store.dispatch({type: 'LOADING_NOW'})
          UserAdapter.setUser(response.id)
+         StoreAdapter.selectedStoreRefresh(localStorage.getItem('store_id'))
          UserAdapter.getUserOrders(response.id)
+         .then(() => store.dispatch({type: 'DONE_LOADING'}))         
        }
     })
   }

@@ -1,5 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
-  before_action :find_order, only: [:update, :show, :order]
+  before_action :find_order, only: [:update, :show, :order, :destroy]
   def index
     @orders = Order.all
     render json: @orders

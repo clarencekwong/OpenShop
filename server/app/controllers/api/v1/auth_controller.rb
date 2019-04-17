@@ -5,7 +5,6 @@ class Api::V1::AuthController < ApplicationController
       jwt = encode_token({user_id: user.id})
       render json: {user: UserSerializer.new(user), jwt: jwt}
     else
-      byebug
       render json: {errors: "Please enter the correct email and password!"}
     end
   end

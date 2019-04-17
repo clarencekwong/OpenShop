@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, Container } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+
+import UserAdapter from '../adapters/UserAdapter'
 
 class StoreForm extends React.Component {
   state = {
@@ -31,7 +32,16 @@ class StoreForm extends React.Component {
       method: "POST",
       body: formData
     })
-    return <Redirect to='/'/>
+    .then(res => res.json())
+    .then(res => {
+      if (res.id) {
+        UserAdapter.storeCreated(true)
+        UserAdapter.setVendor(res.vendor.id)
+        .then(() => this.props.history.push('/'))
+      } else {
+        alert('Please make sure to leave nothing blank.')
+      }
+    })
   }
 
   render() {
@@ -40,7 +50,7 @@ class StoreForm extends React.Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Input onChange={this.handleChange} fluid name="name" label='Store name' placeholder='Store name' />
           <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Store Image' />
-          <Form.Button>Submit</Form.Button>
+          <Form.Button color="blue">Submit</Form.Button>
         </Form>
       </Container>
     )

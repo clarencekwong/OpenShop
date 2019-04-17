@@ -56,7 +56,6 @@ const Product = (props) => {
     <div>
       <Card>
         <Image src={props.product.imageUrl} />
-        <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"/>
         <Card.Content>
           <Card.Header>{props.product.name}</Card.Header>
           <Card.Description>{props.product.description}</Card.Description>
@@ -64,10 +63,9 @@ const Product = (props) => {
         <Label basic>
           ${props.product.cost}
         </Label>
-          <Button icon onClick={handleClick}>
+          <Button icon onClick={handleClick} color="blue">
             <Icon name='shopping cart' />
           </Button>
-
       </Card>
     </div>
   )

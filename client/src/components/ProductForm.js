@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Container } from 'semantic-ui-react'
+import { Form, Container, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 class ProductForm extends React.Component {
@@ -52,15 +52,17 @@ class ProductForm extends React.Component {
   render() {
     return (
       <Container>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' value={this.state.name} />
-          <Form.TextArea onChange={this.handleChange} name="description" label='Product description' placeholder='Product description...' value={this.state.description}/>
-          <Form.Input onChange={this.handleChange} name="sku" fluid label='SKU' placeholder='SKU' value={this.state.sku}/>
-          <Form.Input onChange={this.handleChange} name="cost" fluid type="number" label='Cost' placeholder='Cost' value={this.state.cost}/>
-          <Form.Input onChange={this.handleChange} name="inventory" fluid type="number" label='Inventory' placeholder='Inventory' value={this.state.inventory}/>
-          <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Product Image'/>
-          <Form.Button>Submit</Form.Button>
-        </Form>
+        <Segment>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Input onChange={this.handleChange} fluid name="name" label='Product name' placeholder='Product name' value={this.state.name} />
+            <Form.TextArea onChange={this.handleChange} name="description" label='Product description' placeholder='Product description...' value={this.state.description}/>
+            <Form.Input onChange={this.handleChange} name="sku" fluid label='SKU' placeholder='SKU' value={this.state.sku}/>
+            <Form.Input onChange={this.handleChange} name="cost" fluid type="number" label='Cost' placeholder='Cost' value={this.state.cost}/>
+            <Form.Input onChange={this.handleChange} name="inventory" fluid type="number" label='Inventory' placeholder='Inventory' value={this.state.inventory}/>
+            <Form.Input onChange={this.handleFileChange} name="photo" fluid type="file" label='Product Image'/>
+            <Form.Button color="blue">Submit</Form.Button>
+          </Form>
+        </Segment>
       </Container>
     )
   }

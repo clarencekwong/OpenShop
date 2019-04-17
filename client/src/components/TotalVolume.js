@@ -23,7 +23,9 @@ class TotalVolume extends React.Component {
     this.props.storeOrders.forEach(order => {
       data.push({name: order.name, value: order.cost * order.quantity})
     })
-    return data
+    let filteredData = data.filter(x => x.value > 0)
+    console.log(filteredData)
+    return filteredData
   }
 
   formatQuantityData = () => {
@@ -31,7 +33,9 @@ class TotalVolume extends React.Component {
     this.props.storeOrders.forEach(order => {
       data.push({name: order.name, value: order.quantity})
     })
-    return data
+    let filteredData = data.filter(x => x.value > 0)
+    console.log(filteredData)
+    return filteredData
   }
 
   render () {
@@ -41,14 +45,14 @@ class TotalVolume extends React.Component {
           <Header as='h3' style={{ fontSize: '2em' }}>
             Total Sale Volume
           </Header>
-          <Header as='h1'>{this.totalSaleVolume()} units</Header>
+          <Header as='h1'>{this.props.storeOrders.length > 0 ? this.totalSaleVolume() : "0"} units</Header>
           {<PieCharts data={this.formatQuantityData()}/>}
         </Grid.Column>
         <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
           <Header as='h3' style={{ fontSize: '2em' }}>
             Total Net Income
           </Header>
-          <Header as='h1'>${this.totalNetIncome()}</Header>
+          <Header as='h1'>${this.props.storeOrders.length > 0 ? this.totalNetIncome() : "0"}</Header>
           {<PieCharts data={this.formatCostData()}/>}
         </Grid.Column>
       </Grid.Row>

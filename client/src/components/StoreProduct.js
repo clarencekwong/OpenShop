@@ -25,7 +25,6 @@ const StoreProduct = (props) => {
     <div>
       <Card>
         <Image src={props.product.imageUrl} />
-        <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png"/>
         <Card.Content>
           <Card.Header>{props.product.name}</Card.Header>
           <Label basic>

@@ -41,9 +41,11 @@ class VendorLoginForm extends React.Component {
         this.props.dispatch({type: "SET_VENDOR", payload: response.vendor.id})
         localStorage.setItem('vendor_id', response.jwt)
         UserAdapter.setVendor(response.vendor.id)
-        UserAdapter.storeOrders(response.vendor.id)
+        if (response.vendor.store) {
+          UserAdapter.storeOrders(response.vendor.id)
+        }
         if (!response.vendor.store) {
-          UserAdapter.storeCreated()
+          UserAdapter.storeCreated(false)
         }
         UserAdapter.logUser()
         this.props.history.push('/')

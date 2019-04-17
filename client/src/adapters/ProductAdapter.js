@@ -15,9 +15,6 @@ class ProductAdapter {
     return fetch(`${this.PRODUCT_URL}/${product_id}`, {
       method: "DELETE"
     })
-    .then(() => {
-      store.dispatch({type: 'DELETE_PRODUCT', payload: product_id})
-    })
   }
 }
 

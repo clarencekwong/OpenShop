@@ -25,7 +25,6 @@ class ProductContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.stores.selectedStore)
   return {
     selectedStore: state.stores.selectedStore
   }

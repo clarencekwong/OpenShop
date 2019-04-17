@@ -44,6 +44,16 @@ class CartList extends React.Component {
     })
   }
 
+  handleDelete = () => {
+    fetch(`http://localhost:3000/api/v1/orders/${localStorage.getItem('order_id')}`, {
+      method: 'DELETE'
+    })
+    .then(() => {
+      localStorage.removeItem('order_id')
+      CartAdapter.submitCart()
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -67,7 +77,7 @@ class CartList extends React.Component {
               </Table.Body>
             </Table>
             <Button as={NavLink} to="/" style={{float:"right"}} onClick={this.handleClick}>Check Out</Button>
-            <Button as={NavLink} to="/" style={{float:"right"}} onClick={this.handleClick}>Delete Cart</Button>
+            <Button as={NavLink} to="/" style={{float:"right"}} onClick={this.handleDelete}>Delete Cart</Button>
           </React.Fragment> :
           <React.Fragment>
             <h3>Cart is empty</h3>

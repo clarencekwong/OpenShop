@@ -14,19 +14,12 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 
-// Heads up!
-// We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
-// For more advanced usage please check Responsive docs under the "Usage" section.
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
 
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
 
-/* eslint-disable react/no-multi-comp */
-/* Heads up! HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
- * such things.
- */
 const HomepageHeading = ({ mobile }) => (
   <Container text>
     <Header
@@ -61,10 +54,6 @@ HomepageHeading.propTypes = {
   mobile: PropTypes.bool,
 }
 
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
 class DesktopContainer extends Component {
   state = {}
 
@@ -73,7 +62,6 @@ class DesktopContainer extends Component {
 
   render() {
     const { children } = this.props
-    // const { fixed } = this.state
 
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -186,11 +174,10 @@ const HomepageLayout = () => (
               We Help Business Owners and Customers
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+              You can open your own e-commerce shop and have customers come to you!
             </p>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
+              Customers can browse through a bunch of stores advertised and shop to your hearts content!
             </Header>
             <p style={{ fontSize: '1.33em' }}>
               Yes that's right, you thought it was the stuff of dreams, but even bananas can be

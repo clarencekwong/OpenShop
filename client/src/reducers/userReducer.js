@@ -4,7 +4,8 @@ const initialUserState = {
   logged_in: false,
   vendor: null,
   storeCreated: true,
-  storeOrders: []
+  storeOrders: [],
+  loadingStatus: false
 }
 
 function userReducer(state = initialUserState, action) {
@@ -20,11 +21,15 @@ function userReducer(state = initialUserState, action) {
     case "LOGOUT_USER":
       return {...state, logged_in: false}
     case "STORE_CREATED":
-      return {...state, storeCreated: false}
+      return {...state, storeCreated: action.payload}
     case "STORE_RESET":
       return {...state, storeCreated: true}
     case "STORE_ORDER":
       return {...state, storeOrders: action.payload}
+    case "LOADING_NOW":
+      return {...state, loadingStatus: false}
+    case "DONE_LOADING":
+      return {...state, loadingStatus: true}
     default:
       return state
   }
