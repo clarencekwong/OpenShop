@@ -1,15 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { StripeProvider } from 'react-stripe-elements'
-
-import StripeCheckout from '../components/StripeCheckout'
+import { Container, Segment } from 'semantic-ui-react'
+import CardDemo from '../components/StripTest'
 
 class StripeContainer extends React.Component {
   render () {
     return(
-      <StripeProvider apiKey="pk_test_1wr3mrVO5ZvJn5eSsEM6lL25005ZEZD8YG">
-        <StripeCheckout />
-      </StripeProvider>
+      <Container>
+        <Segment className="payment">
+          <CardDemo />
+        </Segment>
+      </Container>
     )
   }
 }

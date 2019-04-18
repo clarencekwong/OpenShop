@@ -21,11 +21,11 @@ const HomepageHeading = ({ mobile }) => (
       as='h1'
       content='OpenShop'
       style={{
-        color: "#2e86de",
-        fontSize: mobile ? '2em' : '4em',
+        color: "white",
+        fontSize: '5em',
         fontWeight: 'normal',
         marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
+        marginTop: '3em',
       }}
     />
     <Header
@@ -33,9 +33,9 @@ const HomepageHeading = ({ mobile }) => (
       content='Open your own online store or shop'
       style={{
         color: "#2e86de",
-        fontSize: mobile ? '1.5em' : '2.5em',
+        fontSize: '2.5em',
         fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
+        marginTop: '1.5em',
       }}
     />
   </Container>

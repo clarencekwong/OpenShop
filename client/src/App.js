@@ -48,7 +48,7 @@ class App extends Component {
     const jwtVendor = localStorage.getItem('vendor_id')
     return (
       <div className="App">
-      <Menu fixed="top">
+        <Menu fixed="top">
           <Menu.Item as={Link} to="/">
             <Image size="mini" src={oslogo} />
           </Menu.Item>
