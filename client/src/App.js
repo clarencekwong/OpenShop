@@ -12,7 +12,7 @@ import StoreProductContainer from './containers/StoreProductContainer'
 import TransactionContainer from './containers/TransactionContainer'
 import CartContainer from './containers/CartContainer'
 import DashboardContainer from './containers/DashboardContainer'
-// import StripeContainer from './containers/StripeContainer'
+import StripeContainer from './containers/StripeContainer'
 import ProductForm from './components/ProductForm'
 import NotFound from './components/NotFound'
 import UserAdapter from './adapters/UserAdapter'
@@ -63,7 +63,6 @@ class App extends Component {
           }
           <Menu.Menu position="right">
             { jwtUser ? <Menu.Item as={Link} to="/transactions" content="Transactions" /> : null}
-            {/*<Menu.Item as={Link} to="/checkout" content="Checkout" />*/}
             { jwtVendor ? <Menu.Item as={Link} to="/dashboard" content="Dashboard" /> : null}
             { jwtVendor ? null :
             <React.Fragment>
@@ -87,7 +86,7 @@ class App extends Component {
           <Route path="/stores/new" component={StoreForm} />
           <Route path="/product" exact component={StoreProductContainer} />
           <Route path="/cart" component={CartContainer} />
-          {/*<Route path="/checkout" component={StripeContainer} />*/}
+          <Route path="/checkout" component={StripeContainer} />
           <Route path="/login" component={LoginContainer} />
           <Route path="/dashboard" component={DashboardContainer} />
           <Route path="/register" component={RegisterContainer} />

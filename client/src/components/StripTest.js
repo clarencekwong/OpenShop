@@ -26,7 +26,7 @@ const createOptions = () => {
   }
 };
 
-class CardForm extends Component {
+class _CardForm extends Component {
   state = {
     errorMessage: '',
   };
@@ -67,7 +67,7 @@ class CardForm extends Component {
   }
 }
 
-const CardForm = injectStripe(CardForm);
+const CardForm = injectStripe(_CardForm);
 
 export default class CardDemo extends Component {
   render() {
